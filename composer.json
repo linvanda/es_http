@@ -1,5 +1,5 @@
 {
-    "name": "easyswoole/http",
+    "name": "linvanda/es_http",
     "type": "library",
     "description": "An efficient swoole framework",
     "keywords" : ["swoole", "framework", "async","easyswoole"],
@@ -18,7 +18,8 @@
         "easyswoole/component": "^1.0",
         "easyswoole/validate": "^1.1",
         "nikic/fast-route": "^1.3",
-        "psr/http-message": "*"
+        "psr/http-message": "*",
+        "php-di/php-di": "^6.0"
     },
     "autoload": {
         "psr-4": {

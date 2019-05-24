@@ -16,6 +16,7 @@ use EasySwoole\Http\Exception\RouterError;
 use EasySwoole\Http\Message\Status;
 use Swoole\Coroutine as Co;
 use FastRoute\Dispatcher\GroupCountBased;
+use EasySwoole\Component\Di;
 
 class Dispatcher
 {
@@ -221,7 +222,12 @@ class Dispatcher
                 $this->controllerPoolCreateNum[$classKey] = $createNum+1;
                 try{
                     //防止用户在控制器结构函数做了什么东西导致异常
-                    return new $class();
+                    $DIContainer = Di::getInstance()->get(SysConst::DI_CONTAINER);
+                    if ($DIContainer instanceof \DI\Container) {
+                        return $DIContainer->get($class);
+                    } else {
+                        return new $class();
+                    }
                 }catch (\Throwable $exception){
                     $this->controllerPoolCreateNum[$classKey] = $createNum;
                     //直接抛给上层
